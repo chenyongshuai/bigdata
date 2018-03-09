@@ -1,0 +1,13 @@
+ExecuteSQL:
+	SQL select query:SELECT * FROM t_java order by id
+ConvertAvroToJSON:
+	JSON container options:array
+	Wrap Single Record:false
+SplitJson:
+	JsonPath Expression:$.*
+ConvertJSONToSQL:
+	Statement Type:INSERT
+	Table Name:t_java2
+	Translate Field Names:false
+PutSQL:
+	JDBC Connection Pool:DBCPConnectionPool

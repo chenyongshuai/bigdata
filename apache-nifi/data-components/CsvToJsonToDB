@@ -1,0 +1,42 @@
+1.GetFile
+	Input Directory:输入路径
+	File Filter:文件过滤
+	Keep Source File:是否删除源文件
+2.UpdateAttribute
+	schema.name:验证名  (Variables: Variable Name&Value)
+3.ConvertRecord
+	Record Reader:读CSVReader
+	Record Writer:写JsonRecordSetWriter
+4.CSVReader
+	Schema Access Strategy:Use 'Schema Name' Property
+	Schema Registry:AvroSchemaRegistry
+	Value Separator:分隔符(一个字符)
+5.JsonRecordSetWriter
+	Schema Write Strategy:Set 'schema.name' Attribute
+	Schema Access Strategy:Use 'Schema Name' Property
+	Schema Registry:AvroSchemaRegistry
+6.AvroSchemaRegistry
+	java:{
+		    "type":"record",
+		    "name":"java",
+		    "fields":[
+		        {"name":"id","type":"int"},
+		        {"name":"name","type":"string"},
+		        {"name":"category","type":"string"}
+		    ]
+		}
+7.DBCPConnectionPool
+	Database Connection URL:jdbc:mysql://ip:3306/test?useUnicode=true&characterEncoding=utf8
+	Database Driver Class Name:com.mysql.jdbc.Driver
+	Database Driver Location(s):/root/mysql-connector-java-5.1.9.jar
+	Database User:root
+	Password:Sensitive value set
+8.SplitJson
+	JsonPath Expression:$.*
+9.ConvertJSONToSQL
+	JDBC Connection Pool:DBCPConnectionPool
+	Statement Type:INSERT
+	Table Name:表名
+	Translate Field Names:false
+10.PutSQL
+	JDBC Connection Pool:DBCPConnectionPool

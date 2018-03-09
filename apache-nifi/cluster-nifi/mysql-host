@@ -1,0 +1,9 @@
+org.apache.commons.dbcp.SQLNestedException: Cannot create PoolableConnectionFactory (Communications link failure)
+修改mysql远程连接权限问题
+	1.切换到mysql安装bin目录下
+	2.mysql -u root -p 输入密码
+	3.use mysql;
+	4.show tables;
+	5.select host from user;
+	6.update user set host ='%' where user ='root';
+	7.以管理员身份重启mysql    net stop mysql   net start mysql
