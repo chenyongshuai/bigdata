@@ -1,0 +1,3 @@
+Exception1:
+	TNS:listener does not currently know of SID given in connect descriptor
+	ORACLE服务没有开启

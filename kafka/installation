@@ -1,0 +1,25 @@
+1.安装zookeeper
+2.安装kafka
+	tar -zxf kafka_2.11-0.11.0.0.tgz -C /usr/
+	配置文件：
+		broker.id=0
+		delete.topic.enable=true
+		listeners=PLAINTEXT://CentOS:9092
+		log.dirs=/tmp/kafka-logs-0
+		log.retention.hours=168
+		zookeeper.connect=CentOS:2181
+3.启动集群
+	cd /usr/kafka_2.11-0.11.0.0/config
+	kafka-server-start.sh server1.properties 1>/dev/null 2>&1 &
+	kafka-server-start.sh server2.properties 1>/dev/null 2>&1 &
+	
+3.shell
+	查看topic：kafka-topics.sh --list  --zookeeper hive:2181
+	删除topic：kafka-topics.sh --zookeeper localhost --delete --topic full
+	创建topic：kafka-topics.sh --create  --zookeeper hive:2181 --topic topic01 --partitions 3 --replication-factor 2
+	查看topic详情：kafka-topics.sh --zookeeper localhost --describe --topic mytopic
+	修改topic：kafka-topics.sh --alter  --zookeeper CentOS:2181 --topic topic01 --partitions 4
+	订阅topic：kafka-console-consumer.sh --bootstrap-server CentOS:9092,CentOS:9093,CentOS:9094 --topic topic01 --from-beginning
+	发布消息：kafka-console-producer.sh --broker-list CentOS:9092,CentOS:9093,CentOS:9094 --topic topic01
+	
+		

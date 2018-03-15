@@ -1,0 +1,82 @@
+1.安装MySQL数据库
+	yum install mysql-server -y
+	service mysqld start
+	chkconfig mysqld on 
+	mysqladmin -u root password 'root'
+	mysql -u root -proot
+	use mysql
+	delete from user where password='';
+	GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root' WITH GRANT OPTION;
+	flush PRIVILEGES;
+	exit; 
+2.配置
+	tar -zxvf hive
+	配置hive环境变量
+	保证Hadoop的HDFS|Yarn可以正常运行
+	vi /usr/hive/conf/hive-site.xml
+		<configuration>
+			<property>
+	                <name>javax.jdo.option.ConnectionURL</name>
+	                <value>jdbc:mysql://hive:3306/mysql</value>
+	        </property>
+	        <property>
+	                <name>javax.jdo.option.ConnectionDriverName</name>
+	                <value>com.mysql.jdbc.Driver</value>
+	        </property>
+	        <property>
+	                <name>javax.jdo.option.ConnectionUserName</name>
+	                <value>root</value>
+	        </property>
+		    <property>
+		            <name>javax.jdo.option.ConnectionPassword</name>
+		            <value>root</value>
+		    </property>
+		</configuration>
+	拷贝MySQL驱动jar包到HIVE_HOME/lib下
+	拷贝HIVE_HOME/lib/jline-2.12.jar到/usr/hadoop/share/hadoop/yarn/lib并且删除该目录下的jline-0.9.94.jar
+	
+	
+Exception:
+	Exception in thread "main" java.lang.RuntimeException: 
+		java.net.ConnectException: Call From hive/192.168.126.128 to hive:9000 failed on connection exception: 
+		java.net.ConnectException: 拒绝连接; For more details see:  http://wiki.apache.org/hadoop/ConnectionRefused
+	HDFS+YRAN没有开启
+Exception:	
+	Exception in thread "main" java.lang.RuntimeException: java.lang.IllegalArgumentException: 
+	java.net.URISyntaxException: Relative path in absolute URI: ${system:java.io.tmpdir%7D/$%7Bsystem:user.name%7D
+Exception:
+	java.sql.SQLException: 
+		Could not open client transport with JDBC Uri: jdbc:hive2://localhost:10000/default: java.net.ConnectException: 拒绝连接
+	hiveserver2没有开启,查看hive.log
+	
+hive>select current_database();
+
+hive>create database test;
+
+create table t_sr(
+d int ,
+nm varchar(32),
+sx varchar(5)
+) stored as orc;
+
+create table t_bk(
+d int ,
+nm varchar(32),
+thr varchar(30)
+) stored as orc;
+
+create table t_book(
+id int ,
+name varchar(32),
+author varchar(30)
+);
+
+create table t_user(
+id int ,
+name varchar(32),
+sex varchar(5),
+birth date
+);
+
+
+

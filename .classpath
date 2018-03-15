@@ -16,6 +16,9 @@
 	<classpathentry kind="src" path="hdfs"/>
 	<classpathentry kind="src" path="mapreduce"/>
 	<classpathentry excluding="aaa/|arthitecture/" kind="src" path="apache-nifi"/>
+	<classpathentry kind="src" path="kafka"/>
+	<classpathentry kind="src" path="resources"/>
+	<classpathentry kind="src" path="oracle"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>

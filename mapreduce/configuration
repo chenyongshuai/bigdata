@@ -1,0 +1,34 @@
+搭建MapReduce环境
+1.修改yarn-site.xml
+	vi /usr/hadoop/etc/hadoop/yarn-site.xml
+		<property>
+		        <name>yarn.nodemanager.aux-services</name>
+		        <value>mapreduce_shuffle</value>
+		</property>
+		<property>
+		        <name>yarn.resourcemanager.hostname</name>
+		        <value>hive</value>
+		</property>
+2.修改mapred-site.xml (不存在，需要自行创建)
+	vi /usr/hadoop/etc/hadoop/mapred-site.xml
+	    <property>
+	        <name>mapreduce.framework.name</name>
+	        <value>yarn</value>
+	    </property>
+3.启动|停止Yarn
+[root@CentOS ~]# start|stop-yarn.sh 
+
+Exception:
+	Starting resourcemanager
+	ERROR: Attempting to operate on yarn resourcemanager as root
+	ERROR: but there is no YARN_RESOURCEMANAGER_USER defined. Aborting operation.
+	Starting nodemanagers
+	ERROR: Attempting to operate on yarn nodemanager as root
+	ERROR: but there is no YARN_NODEMANAGER_USER defined. Aborting operation.
+vi xxxx-xxxx.sh
+	HDFS_DATANODE_USER=root
+	HADOOP_SECURE_DN_USER=hdfs
+	HDFS_NAMENODE_USER=root
+	HDFS_SECONDARYNAMENODE_USER=root
+	YARN_RESOURCEMANAGER_USER=root
+	YARN_NODEMANAGER_USER=root
