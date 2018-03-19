@@ -36,22 +36,31 @@
 	拷贝HIVE_HOME/lib/jline-2.12.jar到/usr/hadoop/share/hadoop/yarn/lib并且删除该目录下的jline-0.9.94.jar
 	
 	
-Exception:
+Exception1:
 	Exception in thread "main" java.lang.RuntimeException: 
 		java.net.ConnectException: Call From hive/192.168.126.128 to hive:9000 failed on connection exception: 
 		java.net.ConnectException: 拒绝连接; For more details see:  http://wiki.apache.org/hadoop/ConnectionRefused
 	HDFS+YRAN没有开启
-Exception:	
+Exception2:	
 	Exception in thread "main" java.lang.RuntimeException: java.lang.IllegalArgumentException: 
 	java.net.URISyntaxException: Relative path in absolute URI: ${system:java.io.tmpdir%7D/$%7Bsystem:user.name%7D
-Exception:
+Exception3:
 	java.sql.SQLException: 
 		Could not open client transport with JDBC Uri: jdbc:hive2://localhost:10000/default: java.net.ConnectException: 拒绝连接
 	hiveserver2没有开启,查看hive.log
+Exception4:
+	Failed with exception java.io.IOException:org.apache.hadoop.hive.ql.metadata.HiveException: 
+	java.lang.ClassCastException: org.apache.hadoop.io.Text cannot be cast to org.apache.hadoop.io.IntWritable
+Exception5:
+	org.apache.hive.service.cli.HiveSQLException: Error while compiling statement: FAILED: SemanticException Line 1:17 Invalid path ''/user/hive/warehouse/test/T_BK'': 
+	No files matching path hdfs://hive:9000/user/hive/warehouse/test/T_BK
+
 	
 hive>select current_database();
 
 hive>create database test;
+
+加载数据 :LOAD DATA LOCAL INPATH '/path/to/local/files' OVERWRITE  INTO TABLE test
 
 create table t_sr(
 d int ,
@@ -59,7 +68,7 @@ nm varchar(32),
 sx varchar(5)
 ) stored as orc;
 
-create table t_bk(
+create table t_bk4(
 d int ,
 nm varchar(32),
 thr varchar(30)
@@ -78,5 +87,19 @@ sex varchar(5),
 birth date
 );
 
+create table t_person(
+id int ,
+name varchar(32),
+sex varchar(5),
+birth date
+);
 
+create table t_prsn(
+d int ,
+nm varchar(32),
+sx varchar(5),
+brth date
+)stored as orc;
+
+修改linux系统时间：date -s "YYYY-MM-DD  hh:mm:ss" &&hwclock --systohc
 

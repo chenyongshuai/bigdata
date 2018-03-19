@@ -16,12 +16,15 @@ public class HiveTest {
 		Class.forName("org.apache.hive.jdbc.HiveDriver");
 		Connection conn = DriverManager.getConnection("jdbc:hive2://192.168.126.128:10000/default");
 		System.out.println(conn);
-		PreparedStatement ps = conn.prepareStatement("select count(*) from T_BK ");
+		PreparedStatement ps = conn.prepareStatement("select * from T_SR");
 		ResultSet rs = ps.executeQuery();
-		if(rs.next()){
+		while(rs.next()){
 			int int1 = rs.getInt(1);
 			//String string = rs.getString(2);
 			System.out.println(int1);
+			String string = rs.getString(2);
+			System.out.println(string);
+			
 		}
 		rs.close();
 		ps.close();
