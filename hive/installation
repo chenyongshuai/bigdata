@@ -84,7 +84,19 @@ create table t_user(
 id int ,
 name varchar(32),
 sex varchar(5),
-birth date
+birth date,
+deptid int
+);
+
+create table t_dept(
+deptid int,
+deptname varchar(32),
+deptlocal varchar(32)
+);
+
+create table t_vol(
+id int,
+vol decimal
 );
 
 create table t_person(
@@ -102,4 +114,6 @@ brth date
 )stored as orc;
 
 修改linux系统时间：date -s "YYYY-MM-DD  hh:mm:ss" &&hwclock --systohc
+
+select t2.deptname,sum(t3.vol) amount from t_user t1 left join t_dept t2 on t1.deptid=t2.deptid left join t_vol t3 on t1.id = t3.id group by t2.deptname;
 

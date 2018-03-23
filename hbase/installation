@@ -1,0 +1,45 @@
+1.依赖HDFS、ZK
+2.安装Hbase
+	tar -zxf hbase-1.2.4-bin.tar.gz -C /usr/
+	修改环境变量  HBASE_HOME
+	修改hbase-site.xml
+		<property>
+       			<name>hbase.rootdir</name>
+		        <value>hdfs://hive:9000/hbase</value>
+		</property>
+		<property>
+		        <name>hbase.cluster.distributed</name>
+		        <value>true</value>
+		</property>
+		<property>
+		       <name>hbase.zookeeper.quorum</name>
+		       <value>hive</value>
+		</property>
+		<property>
+		        <name>hbase.zookeeper.property.clientPort</name>
+		        <value>2181</value>
+		</property>
+		
+	修改hbase-env.sh：export HBASE_MANAGES_ZK=false
+	启动Hbase服务：start-hbase.sh 
+3.hbase shell:
+	查看数据库：list_namespace
+	创建数据库：create_namespace 'test'
+	查看数据库信息：describe_namespace 'test'
+	建表：create 'test:t_user',{NAME => 'cf1', VERSIONS => 5},{NAME => 'cf2', VERSIONS => 5}
+	删除表：
+		disable 'test:t_user'    
+		drop 'test:t_user'
+	判断是否存在表：exists 'test:t_user'
+	查看表：
+		list  
+		list_namespace_tables 'test'
+		desc 'test:t_user'
+	添加数据：
+		put 'test:t_user','1001','cf1:name','zs'
+		put 'test:t_user','1001','cf1:age','18'
+	查询：
+		get 'test:t_user','1001',{COLUMN => 'cf1'}
+		get 'test:t_user','1001',{COLUMN => ['cf1:name','cf1:age']}
+	
+	

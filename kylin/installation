@@ -1,0 +1,13 @@
+1.安装Hadoop、Hive、Hbase、Zookeeper、Kylin
+	./ZKServer start ../conf/zoo.cfg
+	start-all.sh
+	mr-jobhistory-daemon.sh start historyserver
+	hive --service metastore &
+	hiveserver2 &
+	start-hbase.sh
+2.配置kylin.properties文件
+	check-env.sh
+	kylin.sh start
+	
+	
+	
