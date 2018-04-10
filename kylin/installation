@@ -3,11 +3,242 @@
 	start-all.sh
 	mr-jobhistory-daemon.sh start historyserver
 	hive --service metastore &
-	hiveserver2 &
+	hiveserver2 &     /    hive --service metastore &
 	start-hbase.sh
+	
+	vi .bashrc
+		export HIVE_CONF=/usr/hive/conf	
+		
+			
 2.配置kylin.properties文件
 	check-env.sh
 	kylin.sh start
 	
-	
-	
+Saving MODEL {
+  "name": "example_model",
+  "description": "",
+  "fact_table": "KYLIN.EMP",
+  "lookups": [],
+  "filter_condition": "",
+  "dimensions": [
+    {
+      "table": "EMP",
+      "columns": [
+        "ID",
+        "NAME",
+        "AGE",
+        "BIRTH",
+        "DEPT",
+        "LOC"
+      ]
+    }
+  ],
+  "metrics": [
+    "EMP.SALARY"
+  ],
+  "partition_desc": {
+    "partition_date_column": "EMP.BIRTH",
+    "partition_type": "APPEND",
+    "partition_date_format": "yyyy-MM-dd"
+  },
+  "last_modified": 0
+}
+
+
+Saving cube {
+  "name": "example_cube",
+  "model_name": "example_model",
+  "description": "",
+  "dimensions": [
+    {
+      "name": "ID",
+      "table": "EMP",
+      "column": "ID"
+    },
+    {
+      "name": "NAME",
+      "table": "EMP",
+      "column": "NAME"
+    },
+    {
+      "name": "AGE",
+      "table": "EMP",
+      "column": "AGE"
+    },
+    {
+      "name": "BIRTH",
+      "table": "EMP",
+      "column": "BIRTH"
+    },
+    {
+      "name": "DEPT",
+      "table": "EMP",
+      "column": "DEPT"
+    },
+    {
+      "name": "LOC",
+      "table": "EMP",
+      "column": "LOC"
+    }
+  ],
+  "measures": [
+    {
+      "name": "_COUNT_",
+      "function": {
+        "expression": "COUNT",
+        "returntype": "bigint",
+        "parameter": {
+          "type": "constant",
+          "value": "1"
+        },
+        "configuration": {}
+      }
+    },
+    {
+      "name": "SUM_SALARY",
+      "function": {
+        "expression": "SUM",
+        "returntype": "decimal(19,0)",
+        "parameter": {
+          "type": "column",
+          "value": "EMP.SALARY"
+        }
+      },
+      "showDim": false
+    }
+  ],
+  "dictionaries": [],
+  "rowkey": {
+    "rowkey_columns": [
+      {
+        "column": "EMP.ID",
+        "encoding": "dict",
+        "isShardBy": "false",
+        "encoding_version": 1
+      },
+      {
+        "column": "EMP.NAME",
+        "encoding": "dict",
+        "isShardBy": "false",
+        "encoding_version": 1
+      },
+      {
+        "column": "EMP.AGE",
+        "encoding": "dict",
+        "isShardBy": "false",
+        "encoding_version": 1
+      },
+      {
+        "column": "EMP.BIRTH",
+        "encoding": "dict",
+        "isShardBy": "false",
+        "encoding_version": 1
+      },
+      {
+        "column": "EMP.DEPT",
+        "encoding": "dict",
+        "isShardBy": "false",
+        "encoding_version": 1
+      },
+      {
+        "column": "EMP.LOC",
+        "encoding": "dict",
+        "isShardBy": "false",
+        "encoding_version": 1
+      }
+    ]
+  },
+  "aggregation_groups": [
+    {
+      "includes": [
+        "EMP.ID",
+        "EMP.NAME",
+        "EMP.AGE",
+        "EMP.BIRTH",
+        "EMP.DEPT",
+        "EMP.LOC"
+      ],
+      "select_rule": {
+        "hierarchy_dims": [],
+        "mandatory_dims": [],
+        "joint_dims": []
+      }
+    }
+  ],
+  "mandatory_dimension_set_list": [],
+  "partition_date_start": 0,
+  "notify_list": [],
+  "hbase_mapping": {
+    "column_family": [
+      {
+        "name": "F1",
+        "columns": [
+          {
+            "qualifier": "M",
+            "measure_refs": [
+              "_COUNT_",
+              "SUM_SALARY"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "volatile_range": "0",
+  "retention_range": "0",
+  "status_need_notify": [
+    "ERROR",
+    "DISCARDED",
+    "SUCCEED"
+  ],
+  "auto_merge_time_ranges": [
+    604800000,
+    2419200000
+  ],
+  "engine_type": "2",
+  "storage_type": "2",
+  "override_kylin_properties": {}
+}
+
+
+hive -e "USE default;
+
+DROP TABLE IF EXISTS kylin_intermediate_example_cube_358e61a9_1e6a_4ea0_adcf_664cfb525e70;
+CREATE EXTERNAL TABLE IF NOT EXISTS kylin_intermediate_example_cube_358e61a9_1e6a_4ea0_adcf_664cfb525e70
+(
+EMP_ID int
+,EMP_NAME string
+,EMP_AGE int
+,EMP_BIRTH date
+,EMP_DEPT string
+,EMP_LOC string
+,EMP_SALARY decimal(10,0)
+)
+STORED AS SEQUENCEFILE
+
+
+Exception: 
+	java.net.ConnectException: Call From hive/192.168.126.128 to 0.0.0.0:10020 failed on connection exception: 
+	java.net.ConnectException: 拒绝连接; For more details see:  http://wiki.apache.org/hadoop/ConnectionRefused
+		   
+	Hadoop jobHistory 没有运行
+		   
+Exception: 
+	ERROR : Job Submission failed with exception 'org.apache.hadoop.security.AccessControlException
+		(Permission denied: user=hive, access=EXECUTE, inode="/tmp/hadoop-yarn/staging":anonymous:supergroup:drwx------
+		
+		hadoop fs -chmod 777 /tmp/hadoop-yarn/staging/anonymous/.staging
+		修改权限
+		
+Exception: 
+	common.HadoopJobStatusChecker:58 : error check statuss
+
+Exception: 
+	java.io.IOException: OS command error exit with return code: 2, error message: 
+
+Exception: 
+	FAILED: Execution Error, return code 2 from org.apache.hadoop.hive.ql.exec.mr.MapRedTask
+
+Exception:
+	The APR based Apache Tomcat Native library which allows optimal performance in production environments 
+	was not found on the java.library.path: /usr/hadoop/lib/native/:/usr/hbase/lib/native/Linux-amd64-64

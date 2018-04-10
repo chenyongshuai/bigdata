@@ -55,6 +55,13 @@ Exception5:
 	org.apache.hive.service.cli.HiveSQLException: Error while compiling statement: FAILED: SemanticException Line 1:17 Invalid path ''/user/hive/warehouse/test/T_BK'': 
 	No files matching path hdfs://hive:9000/user/hive/warehouse/test/T_BK
 
+Exception6:
+	Could not create ServerSocket on address 0.0.0.0/0.0.0.0:9083
+	Hive启动两次，先杀死进程
+	
+Exception7:
+	Execution Error, return code 1 from org.apache.hadoop.hive.ql.exec.MoveTask
+	{"RemoteException":{"exception":"IOException","javaClassName":"java.io.IOException","message":"Failed to find datanode, suggest to check cluster health."}}
 	
 hive>select current_database();
 
@@ -100,10 +107,10 @@ vol decimal
 );
 
 create table t_person(
-id int ,
-name varchar(32),
-sex varchar(5),
-birth date
+p_id int ,
+p_name varchar(32),
+p_sex varchar(5),
+p_birth date
 );
 
 create table t_prsn(
@@ -117,3 +124,23 @@ brth date
 
 select t2.deptname,sum(t3.vol) amount from t_user t1 left join t_dept t2 on t1.deptid=t2.deptid left join t_vol t3 on t1.id = t3.id group by t2.deptname;
 
+1 张三 24 1994-01-29 14325 市场部 郑州
+2 李四 25 1993-06-29 14525 销售部 上海
+3 王五 25 1993-03-29 11231 财务部部 上海
+4 赵六 21 1997-04-29 15987 IT 上海
+5 田七 30 1987-06-29 22233 销售部 郑州
+6 李雷 35 1982-06-29 12453 财务部 郑州
+7 韩梅梅 21 1997-04-29 8888 IT 深圳
+8 杜海涛 33 1984-01-29 14325 市场部 上海
+create table t_emp(
+e_id int,
+e_name varchar(32),
+e_age int,
+e_birth date,
+e_salary decimal,
+e_dept varchar(32),
+e_loc varchar(32)
+);
+LOAD DATA LOCAL INPATH '/root/example.txt' OVERWRITE  INTO TABLE emp;
+
+Linux下查找文件位置：find / -name  'example_kylin.json'

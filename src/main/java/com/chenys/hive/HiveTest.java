@@ -16,7 +16,7 @@ public class HiveTest {
 		Class.forName("org.apache.hive.jdbc.HiveDriver");
 		Connection conn = DriverManager.getConnection("jdbc:hive2://192.168.126.128:10000/default");
 		System.out.println(conn);
-		PreparedStatement ps = conn.prepareStatement("select * from T_SR");
+		/*PreparedStatement ps = conn.prepareStatement("select * from emp");
 		ResultSet rs = ps.executeQuery();
 		while(rs.next()){
 			int int1 = rs.getInt(1);
@@ -27,7 +27,7 @@ public class HiveTest {
 			
 		}
 		rs.close();
-		ps.close();
+		ps.close();*/
 		conn.close();
 	}	
 }

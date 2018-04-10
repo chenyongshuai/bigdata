@@ -1,3 +1,4 @@
+-----Oracle表名字段名全大写 -----Mysql表名字段名全小写
 ExecuteSQL:
 	SQL select query:SELECT * FROM t_java order by id
 ConvertAvroToJSON:

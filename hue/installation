@@ -1,0 +1,117 @@
+Exception:
+	[Errno 104] Connection reset by peer
+	
+Exception:
+	ERROR    Could not create home directory at login for root.
+	
+Exception:
+	"message" : "User: hue is not allowed to impersonate root",
+	su - hdfs -c "hdfs dfs -mkdir /user/hue"
+	su - hdfs -c "hdfs dfs -chown hue:hadoop /user/hue" [ Or you can make group owner as hdfs ]
+	su - hdfs -c "hdfs dfs -chmod 755 /user/hue"
+	means hue user belongs to group hadoop/hdfs
+	
+Exception:
+	ERROR    Failed to get filesystem called "default" for "s3a" schema: Filesystem not configured for s3a
+	
+Exception:
+	TSocket read 0 bytes
+	
+Exception:
+	Error creating table sample_07: Could not start SASL: Error in sasl_client_start (-4) SASL(-4):
+	yum -y install cyrus-sasl-plain cyrus-sasl-devel cyrus-sasl-gssapi
+
+Installation:（Hive on Hue）
+	1.下载Hue：https://dl.dropboxusercontent.com/u/730827/hue/releases/3.12.0/hue-3.12.0.tgz
+	2.yum groupinstall -y "Development Tools" "Development Libraries"
+	3.yum install -y apache-maven ant asciidoc cyrus-sasl-devel cyrus-sasl-gssapi gcc gcc-c++ krb5-devel libxml2-devel libxslt-devel make mysql mysql-devel openldap-devel python-devel sqlite-devel gmp-devel libffi-devel
+	  yum install krb5-devel cyrus-sasl-gssapi cyrus-sasl-deve libxml2-devel libxslt-devel mysql mysql-devel openldap-devel python-devel python-simplejson sqlite-devel
+	  yum -y install cyrus-sasl-plain cyrus-sasl-devel cyrus-sasl-gssapi
+	4.tar -zxvf hue-3.12.0.tgz -C /usr
+	5.vi /usr/hadoop/etc/hadoop/hdfs-site.xml:
+		<property>
+		     <name>dfs.webhdfs.enabled</name>
+		     <value>true</value>
+		</property>
+		<property>
+		     <name>dfs.permissions.enabled</name>
+		     <value>false</value>
+		</property>
+	6.vi /usr/hadoop/etc/hadoop/core-site.xml
+		<property>
+		     <name>hadoop.proxyuser.hue.hosts</name>
+		      <value>*</value>
+		</property>
+		<property>
+		      <name>hadoop.proxyuser.hue.groups</name>
+		      <value>*</value>
+		</property>
+		<property>
+		       <name>hadoop.proxyuser.root.hosts</name>
+		       <value>*</value>
+		 </property>
+		  <property>
+		       <name>hadoop.proxyuser.root.groups</name>
+		        <value>*</value>
+		 </property>
+	7.vi /usr/hadoop/etc/hadoop/yarn-site.xml
+		<!--打开HDFS上日志记录功能-->
+		<property>
+		    <name>yarn.log-aggregation-enable</name>
+		    <value>true</value>
+		</property>
+		<!--在HDFS上聚合的日志最长保留多少秒。3天-->
+		<property>
+		     <name>yarn.log-aggregation.retain-seconds</name>
+		     <value>259200</value>
+		</property>		
+	8.vi /usr/hadoop/etc/hadoop/httpfs-site.xml
+		<property>
+		    <name>httpfs.proxyuser.hue.hosts</name>
+		    <value>*</value>
+		</property>	
+		<property>
+		    <name>httpfs.proxyuser.hue.groups</name>
+		    <value>*</value>
+		</property>
+	9.  useradd hue
+		chmod -R 777 /usr/hue/
+		chown -R hue:hue /usr/hue/
+	10.vi /usr/hue/desktop/conf/hue.ini
+		[desktop]
+			secret_key=jFE93j;2[290-eiw.KEiwN2s3['d;/.q[eIW^y#e=+Iei*@Mn<qW5o
+			http_host=kylin
+			default_hdfs_superuser=root
+		[hdfs_clusters]
+			fs_defaultfs=hdfs://kylin:8020
+			webhdfs_url=http://kylin:50070/webhdfs/v1
+		[yarn_clusters]
+			resourcemanager_host=kylin
+			resourcemanager_port=8032
+			resourcemanager_api_url=http://kylin:8088
+			proxy_api_url=http://kylin:8030
+			history_server_api_url=http://kylin:19888
+		[beeswax]
+			hive_server_host=kylin
+			hive_server_port=10000
+		[zookeeper]
+			host_ports=kylin:2181
+		[mysql]
+			name=mysql	
+			engine=mysql
+			host=kylin
+			port=3306
+			user=root
+			password=root
+		app_blacklist=pig,hbase,spark,impala,oozie
+	11. cd /usr/zookeeper/bin
+		./zkServer start ../conf/zoo.cfg
+		start-all.sh
+		hiveserver2 &
+		hue syncdb
+		hue migrate
+		supervisor &
+		
+		
+		
+		
