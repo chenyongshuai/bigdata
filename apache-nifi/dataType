@@ -4,3 +4,9 @@
 	3.队列
 	4.传统型数据库
 	5.NoSql
+	6.FTP
+模板：
+	Oracle/MySQL--->Hive
+	Hive---->MySQL/Oracle
+	FTP---->Oracle/MySQL/Hive
+	CSV---->DB/Hive

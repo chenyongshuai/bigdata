@@ -1,0 +1,48 @@
+1.分桶
+	clustered by(column) into 3 buckets
+	stored as orc
+	 
+
+
+2.分区
+	partitioned by(pt_dt type)
+	stored as orc
+	
+	
+3.修改删除
+	create table tablename()
+	partitioned by(pt_dt type)
+	clustered by(column) into 3 buckets
+	stored as orc
+	TBLPROPERTIES('transactional'='true');
+	
+	修改配置文件：
+		<property>  
+		    <name>hive.support.concurrency</name>  
+		    <value>true</value>  
+		</property>  
+		<property>  
+		    <name>hive.exec.dynamic.partition.mode</name>  
+		    <value>nonstrict</value>  
+		</property>  
+		<property>  
+		    <name>hive.txn.manager</name>  
+		    <value>org.apache.hadoop.hive.ql.lockmgr.DbTxnManager</value>  
+		</property>  
+		<property>  
+		    <name>hive.compactor.initiator.on</name>  
+		    <value>true</value>  
+		</property>  
+		<property>  
+		    <name>hive.compactor.worker.threads</name>  
+		    <value>1</value>  
+		</property>  
+	修改hive元数据：
+		INSERT INTO NEXT_LOCK_ID VALUES(1);  
+		INSERT INTO NEXT_COMPACTION_QUEUE_ID VALUES(1);  
+		INSERT INTO NEXT_TXN_ID VALUES(1);  
+		COMMIT; 
+		
+		
+		
+	  
