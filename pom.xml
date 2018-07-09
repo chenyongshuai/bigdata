@@ -11,10 +11,188 @@
   <url>http://maven.apache.org</url>
 
   <properties>
+  	<maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <junit.version>4.11</junit.version>
+    <spring.version>5.0.5.RELEASE</spring.version>
+    <aspectj.version>1.8.11</aspectj.version>
+    <dbcp.version>1.4</dbcp.version>
+    <mybatis.version>1.3.1</mybatis.version>
+    <org.mybatis.version>3.4.6</org.mybatis.version>
+    <mysql.version>5.1.38</mysql.version>
+    <fastjson.version>1.2.47</fastjson.version>
+    <log4j.version>1.7.25</log4j.version>
+    <log4j>1.2.17</log4j>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <nifi.version>1.5.0</nifi.version>
+    <mahout.version>0.13.0</mahout.version>
+    <lucene.version>4.9.0</lucene.version>
   </properties>
 
   <dependencies>
+  	<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+	<dependency>
+	    <groupId>org.slf4j</groupId>
+	    <artifactId>slf4j-api</artifactId>
+	    <version>${log4j.version}</version>
+	</dependency>	
+	<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 -->
+	<dependency>
+	    <groupId>org.slf4j</groupId>
+	    <artifactId>slf4j-log4j12</artifactId>
+	    <version>${log4j.version}</version>
+	    <scope>test</scope>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/log4j/log4j -->
+	<dependency>
+	    <groupId>log4j</groupId>
+	    <artifactId>log4j</artifactId>
+	    <version>${log4j}</version>
+	</dependency>
+  	<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+	<dependency>
+	    <groupId>com.alibaba</groupId>
+	    <artifactId>fastjson</artifactId>
+	    <version>${fastjson.version}</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-jdbc</artifactId>
+	    <version>${spring.version}</version>
+	</dependency>
+  	<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+	<dependency>
+	    <groupId>org.mybatis</groupId>
+	    <artifactId>mybatis</artifactId>
+	    <version>${org.mybatis.version}</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+	<dependency>
+	    <groupId>mysql</groupId>
+	    <artifactId>mysql-connector-java</artifactId>
+	    <version>${mysql.version}</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-jdbc</artifactId>
+	    <version>${spring.version}</version>
+	</dependency>
+  	<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-context</artifactId>
+	    <version>${spring.version}</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-core</artifactId>
+	    <version>${spring.version}</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-beans</artifactId>
+	    <version>${spring.version}</version>
+	</dependency>
+	<dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-expression</artifactId>
+        <version>${spring.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context-support</artifactId>
+        <version>${spring.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.aspectj</groupId>
+        <artifactId>aspectjweaver</artifactId>
+        <version>${aspectj.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-aop</artifactId>
+        <version>${spring.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-tx</artifactId>
+        <version>${spring.version}</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.springframework/spring-aop -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-aop</artifactId>
+	    <version>${spring.version}</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-web</artifactId>
+	    <version>${spring.version}</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-webmvc</artifactId>
+	    <version>${spring.version}</version>
+	</dependency>
+	<dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-test</artifactId>
+        <version>${spring.version}</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-dbcp2 -->
+	<dependency>
+	    <groupId>commons-dbcp</groupId>
+	    <artifactId>commons-dbcp</artifactId>
+	    <version>${dbcp.version}</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
+	<dependency>
+	    <groupId>org.mybatis</groupId>
+	    <artifactId>mybatis-spring</artifactId>
+	    <version>${mybatis.version}</version>
+	</dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit.version}</version>
+    </dependency>
+  	<!-- https://mvnrepository.com/artifact/com.janeluo/ikanalyzer -->
+	<dependency>
+	    <groupId>com.janeluo</groupId>
+	    <artifactId>ikanalyzer</artifactId>
+	    <version>2012_u6</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.apache.lucene/lucene-analyzers-common -->
+	<dependency>
+	    <groupId>org.apache.lucene</groupId>
+	    <artifactId>lucene-analyzers-common</artifactId>
+	    <version>${lucene.version}</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.apache.lucene</groupId>
+	    <artifactId>lucene-core</artifactId>
+	    <version>${lucene.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.apache.lucene</groupId>
+		<artifactId>lucene-highlighter</artifactId>
+		<version>${lucene.version}</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.apache.lucene/lucene-queryparser -->
+	<dependency>
+	    <groupId>org.apache.lucene</groupId>
+	    <artifactId>lucene-queryparser</artifactId>
+	    <version>${lucene.version}</version>
+	</dependency>
+  	<!-- https://mvnrepository.com/artifact/org.apache.lucene/lucene-core -->
+	<!-- <dependency>
+	    <groupId>org.apache.lucene</groupId>
+	    <artifactId>lucene-core</artifactId>
+	    <version>3.6.2</version>
+	</dependency> -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -28,7 +206,6 @@
 	    <scope>system</scope>
 	    <systemPath>E:\work_tools\jdk1.8\lib\tools.jar</systemPath>
 	</dependency>
-	
 	<dependency>
 	    <groupId>org.apache.hadoop</groupId>
 	    <artifactId>hadoop-common</artifactId>
@@ -71,5 +248,93 @@
         <artifactId>commons-lang3</artifactId>
         <version>3.6</version>
     </dependency>
+    <dependency>
+        <groupId>org.apache.nifi</groupId>
+        <artifactId>nifi-api</artifactId>
+        <version>${nifi.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.nifi</groupId>
+        <artifactId>nifi-utils</artifactId>
+        <version>${nifi.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.nifi</groupId>
+        <artifactId>nifi-processor-utils</artifactId>
+        <version>${nifi.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-io</artifactId>
+        <version>1.3.2</version>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.nifi</groupId>
+        <artifactId>nifi-mock</artifactId>
+        <version>${nifi.version}</version>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>com.jayway.jsonpath</groupId>
+        <artifactId>json-path</artifactId>
+        <version>1.2.0</version>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.nifi</groupId>
+        <artifactId>nifi-dbcp-service-api</artifactId>
+        <version>${nifi.version}</version>
+    </dependency>
+   	<dependency>
+   		<groupId>org.apache.nifi</groupId>
+   		<artifactId>nifi-dbcp-service</artifactId>
+   		<version>${nifi.version}</version>
+   	</dependency>
+   	<dependency>
+        <groupId>org.apache.nifi</groupId>
+        <artifactId>nifi-standard-services-api-nar</artifactId>
+        <version>${nifi.version}</version>
+        <type>nar</type>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.nifi</groupId>
+        <artifactId>nifi-dbcp-service</artifactId>
+       	<version>${nifi.version}</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+	<dependency>
+	    <groupId>com.alibaba</groupId>
+	    <artifactId>fastjson</artifactId>
+	    <version>1.2.46</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+	<dependency>
+	    <groupId>commons-io</groupId>
+	    <artifactId>commons-io</artifactId>
+	    <version>2.4</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.apache.mahout/mahout-core -->
+	<dependency>
+	    <groupId>org.apache.mahout</groupId>
+	    <artifactId>mahout-core</artifactId>
+	    <version>0.9</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.apache.mahout/mahout-math -->
+	<dependency>
+	    <groupId>org.apache.mahout</groupId>
+	    <artifactId>mahout-math</artifactId>
+	    <version>0.13.0</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.apache.mahout/mahout-integration -->
+	<dependency>
+	    <groupId>org.apache.mahout</groupId>
+	    <artifactId>mahout-integration</artifactId>
+	    <version>0.13.0</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-math3 -->
+	<dependency>
+	    <groupId>org.apache.commons</groupId>
+	    <artifactId>commons-math3</artifactId>
+	    <version>3.6.1</version>
+	</dependency>
   </dependencies>
 </project>

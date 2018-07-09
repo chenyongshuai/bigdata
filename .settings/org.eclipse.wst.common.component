@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="bigdata">
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/hive"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/hdfs"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/mapreduce"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/apache-nifi"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/kafka"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/resources"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/oracle"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/hbase"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/mongoDB"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/kylin"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/zookeeper"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/hue"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/spark"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resource"/>
+        <property name="context-root" value="bigdata"/>
+        <property name="java-output-path" value="/bigdata/target/classes"/>
+    </wb-module>
+</project-modules>
