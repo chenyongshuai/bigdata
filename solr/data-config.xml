@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<dataConfig>
+    <dataSource name="source1" type="JdbcDataSource"
+              driver="com.mysql.jdbc.Driver"
+              url="jdbc:mysql://192.168.126.128:3306/test?useUnicode=true&amp;characterEncoding=utf8"
+              user="root"
+              password="root" />
+    <document>
+        <entity name="cc_bill" dataSource="source1"
+            query="select last_deal_job from order_detail">
+            <field column="last_deal_job" name="ProName" />
+        </entity>
+    </document>
+</dataConfig>

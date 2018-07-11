@@ -17,6 +17,7 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/hue"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/spark"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/solr"/>
         <property name="context-root" value="bigdata"/>
         <property name="java-output-path" value="/bigdata/target/classes"/>
     </wb-module>

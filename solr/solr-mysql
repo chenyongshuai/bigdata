@@ -1,0 +1,16 @@
+0.安装jdk1.8 ， 解压 solr7 配置SOLR_HOME
+1.安装MySQL数据库
+	yum install mysql-server -y
+	service mysqld start
+	chkconfig mysqld on 
+	mysqladmin -u root password 'root'
+	mysql -u root -proot
+	use mysql
+	delete from user where password='';
+	GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root' WITH GRANT OPTION;
+	flush PRIVILEGES;
+	exit; 
+2.所需配置：solrconfig.xml  配置dataimporthandle
+		   data-config.xml 配置数据源
+		   managed-schema  配置属性
+3.http://192.168.126.128:8983/solr/dataimport?command=delta-import

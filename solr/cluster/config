@@ -1,0 +1,53 @@
+1.配置zookeeper集群
+	伪集群：
+	tickTime=2000
+	initLimit=10
+	syncLimit=5
+	dataDir=/usr/zookeeper01/data
+	clientPort=2181
+	server.1=192.168.126.128:2881:3881
+	server.2=192.168.126.128:2882:3882
+	server.3=192.168.126.128:2883:3883
+	/usr/zookeeper01/data下创建myid 1
+	
+	
+	tickTime=2000
+	initLimit=10
+	syncLimit=5
+	dataDir=/usr/zookeeper02/data
+	clientPort=2182
+	server.1=192.168.126.128:2881:3881
+	server.2=192.168.126.128:2882:3882
+	server.3=192.168.126.128:2883:3883
+	/usr/zookeeper01/data下创建myid 2
+	
+	
+	tickTime=2000
+	initLimit=10
+	syncLimit=5
+	dataDir=/usr/zookeeper03/data
+	clientPort=2183
+	server.1=192.168.126.128:2881:3881
+	server.2=192.168.126.128:2882:3882
+	server.3=192.168.126.128:2883:3883
+	/usr/zookeeper01/data下创建myid 3
+2.配置solr集群
+	solr.in.sh: ZK_HOST="192.168.126.128:2181,192.168.126.128:2182,192.168.126.128:2183"
+				SOLR_HOST="192.168.126.128"
+				SOLR_PORT=8983
+	solr.xml:   <str name="host">${host:192.168.126.128}</str>
+    			<int name="hostPort">${jetty.port:8983}</int>
+				<str name="zkHost">192.168.126.128:2181,192.168.126.128:2182,192.168.126.128:2183</str>
+	web.xml:    <env-entry>
+			       <env-entry-name>solr/home</env-entry-name>
+			       <env-entry-value>/usr/solr</env-entry-value>
+			       <env-entry-type>java.lang.String</env-entry-type>
+    			</env-entry>
+    
+
+
+
+
+
+
+
